@@ -156,7 +156,7 @@ void write() {
 			if (!firstt) ofs << "},\n";
 			ofs << "    {";
 			ofs << "\"name\": \"" << itee->first << "\", \"description\": \"";
-			ofs << itee->second.Publisher << ' ' << itee->second.Platform << ' ' << itee->second.Year << "\",";
+			ofs << itee->second.Publisher << ", " << itee->second.Platform << ", " << itee->second.Year << "\",";
 			ofs << "\"size\": " << itee->second.Global_Sales;
 			if (firstt) firstt = false;
 		}
