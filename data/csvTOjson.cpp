@@ -8,7 +8,7 @@ using namespace std;
 struct Details
 {
 	Details() {}
-	Details(string pt, string ya, string pb, double gs) : Publisher(pb), Year(ya), Platform(pt), Global_Sales(gs){ }
+	Details(string pt, string ya, string pb, double gs) : Publisher(pb), Year(ya), Platform(pt), Global_Sales(gs) { }
 	string Platform; // 3
 	string Year; // 4
 	string Publisher; // 6
@@ -130,7 +130,19 @@ void load() {
 		ss.clear();
 		ss = stringstream(global_sales);
 		ss >> gs;
-		genres[genre][name] = Details(platform, year, publisher, gs);
+		if (genres[genre][name].Platform != "") {
+			if (genres[genre][name].Year < year) {
+				genres[genre][name] = Details(platform + "&" + genres[genre][name].Platform,
+					genres[genre][name].Year, publisher, gs + genres[genre][name].Global_Sales);
+			}
+			else {
+				genres[genre][name] = Details(platform + "&" + genres[genre][name].Platform,
+					year, publisher, gs + genres[genre][name].Global_Sales);
+			}
+		}
+		else {
+			genres[genre][name] = Details(platform, year, publisher, gs);
+		}
 	}
 }
 
@@ -162,7 +174,7 @@ void write() {
 		}
 		ofs << "}\n";
 
-		ofs << "   ]";
+		ofs << "   ]\n";
 		if (first) first = false;
 	}
 	ofs << "  }\n";
