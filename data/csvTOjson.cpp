@@ -1,4 +1,5 @@
 #include <fstream>
+#include <iomanip>
 #include <unordered_map>
 #include <string>
 #include <sstream>
@@ -169,7 +170,7 @@ void write() {
 			ofs << "    {";
 			ofs << "\"name\": \"" << itee->first << "\", \"description\": \"";
 			ofs << itee->second.Publisher << ", " << itee->second.Platform << ", " << itee->second.Year << "\",";
-			ofs << "\"size\": " << itee->second.Global_Sales;
+			ofs << "\"size\": " << fixed << setprecision(2) << itee->second.Global_Sales;
 			if (firstt) firstt = false;
 		}
 		ofs << "}\n";
